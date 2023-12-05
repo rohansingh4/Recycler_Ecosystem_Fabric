@@ -1,0 +1,22 @@
+{
+    "name": "batterypackeolrequest",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "commonjs",
+    "engines": {
+      "node": ">=12",
+      "npm": ">=6.9"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "fabric-chaincode-node start"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "fabric-contract-api": "^2.2.3",
+      "fabric-shim": "^2.2.3"
+    }
+  }

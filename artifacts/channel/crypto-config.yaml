@@ -1,0 +1,214 @@
+
+# OrdererOrgs:
+#   # ---------------------------------------------------------------------------
+#   # Orderer
+#   # ---------------------------------------------------------------------------
+#   - Name: Orderer
+#     Domain: example.com
+#     EnableNodeOUs: true
+
+#     # ---------------------------------------------------------------------------
+#     # "Specs" - See PeerOrgs below for complete description
+#     # ---------------------------------------------------------------------------
+#     Specs:
+#       - Hostname: orderer
+#         SANS:
+#             - "localhost"
+#             - "127.0.0.1"
+#       - Hostname: orderer2
+#         SANS:
+#           - "localhost"
+#           - "127.0.0.1"
+#       - Hostname: orderer3
+#         SANS:
+#             - "localhost"
+#             - "127.0.0.1"
+
+# # ---------------------------------------------------------------------------
+# # "PeerOrgs" - Definition of organizations managing peer nodes
+# # ---------------------------------------------------------------------------
+# PeerOrgs:
+#   # ---------------------------------------------------------------------------
+#   # Org1
+#   # ---------------------------------------------------------------------------
+#   - Name: Org1
+#     Domain: org1.example.com
+#     EnableNodeOUs: true
+
+#     Template:
+#       Count: 2
+#       # Start: 5
+#       # Hostname: {{.Prefix}}{{.Index}} # default
+#       SANS:
+#         - "localhost"
+
+#     Users:
+#       Count: 1
+
+#   - Name: Org2
+#     Domain: org2.example.com
+#     EnableNodeOUs: true
+
+#     Template:
+#       Count: 2
+#       # Start: 5
+#       # Hostname: {{.Prefix}}{{.Index}} # default
+#       SANS:
+#         - "localhost"
+
+#     Users:
+#       Count: 1
+
+#   - Name: Org2
+#     Domain: org2.example.com
+#     EnableNodeOUs: true
+
+#     Template:
+#       Count: 2
+#       # Start: 5
+#       # Hostname: {{.Prefix}}{{.Index}} # default
+#       SANS:
+#         - "localhost"
+
+#     Users:
+#       Count: 1
+
+---
+OrdererOrgs:
+  - Name: Orderer
+    Domain: example.com
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer
+        SANS:
+          - "localhost"
+          - "127.0.0.1"
+      - Hostname: orderer2
+        SANS:
+          - "localhost"
+          - "127.0.0.1"
+      - Hostname: orderer3
+        SANS:
+          - "localhost"
+          - "127.0.0.1"
+
+PeerOrgs:
+  - Name: ServiceOrg1
+    Domain: serviceorg1.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: OEMOrg1
+    Domain: oemorg1.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: LogisticsOrg1
+    Domain: logisticsorg1.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: RestarOrg1
+    Domain: restarorg1.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: RestarOrg2
+    Domain: restarorg2.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: RestarOrg3
+    Domain: restarorg3.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: ServiceOrg3
+    Domain: serviceorg3.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: ServiceOrg2
+    Domain: serviceorg2.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: OEMOrg2
+    Domain: oemorg2.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: LogisticsOrg2
+    Domain: logisticsorg2.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: LogisticsOrg3
+    Domain: logisticsorg3.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: ServiceOrg4
+    Domain: serviceorg4.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
