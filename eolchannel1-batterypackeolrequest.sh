@@ -76,8 +76,8 @@ setGlobalsForPeer1RestarOrg1(){
 CHANNEL_NAME1="eolchannel1"
 CC_RUNTIME_LANGUAGE="node"
 VERSION="1"
-CC_SRC_PATH="./artifacts/src/github.com/batterypackcharacteristics"
-CC_NAME="batterypackcharacteristics"
+CC_SRC_PATH="./artifacts/src/github.com/batterypackeolrequest"
+CC_NAME="batterypackeolrequest"
 
 packageChaincode() {
     rm -rf ${CC_NAME}.tar.gz

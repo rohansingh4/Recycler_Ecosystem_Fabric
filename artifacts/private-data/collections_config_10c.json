@@ -1,0 +1,20 @@
+[
+     // {
+     //      "name": "eolchannel10",
+     //      "policy": "OR('ServiceOrg3MSP.member', 'LogisticsOrg3MSP.member')",
+     //      "requiredPeerCount": 0,
+     //      "maxPeerCount": 3,
+     //      "blockToLive": 1000000,
+     //      "memberOnlyRead": true,
+     //      "memberOnlyWrite": true
+     // },
+     {
+          "name": "eolchannel1",
+          "policy": "OR('ServiceOrg1MSP.member', 'LogisticsOrg1MSP.member')",
+          "requiredPeerCount": 0,
+          "maxPeerCount": 3,
+          "blockToLive": 1000000,
+          "memberOnlyRead": true,
+          "memberOnlyWrite": true         
+     }
+]
