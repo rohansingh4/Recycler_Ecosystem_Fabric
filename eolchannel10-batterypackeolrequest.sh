@@ -5,7 +5,7 @@ export PEER0_ORG3_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/lo
 export PEER0_ORG4_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg1.example.com/peers/peer0.restarorg1.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/artifacts/channel/config/
 
-export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config.json
+export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config10.json
 
 
 export CHANNEL_NAME1="eolchannel10"

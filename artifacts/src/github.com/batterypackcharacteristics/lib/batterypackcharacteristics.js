@@ -5,6 +5,7 @@ const { Contract } = require('fabric-contract-api');
 class BatteryPackCharacteristics extends Contract {
 
     async initLedger(ctx) {
+        console.log("hello")
         console.info('============= START : Initialize Ledger ===========');
         const batterypackcharacteristics = [
             {
@@ -35,6 +36,7 @@ class BatteryPackCharacteristics extends Contract {
     }
 
     async queryBatteryPackCharacteristics(ctx, batteryPackCharacteristicsNumber) {
+        console.log("hello")
         const batteryPackCharacteristicsAsBytes = await ctx.stub.getState(batteryPackCharacteristicsNumber);
         if (!batteryPackCharacteristicsAsBytes || batteryPackCharacteristicsAsBytes.length === 0) {
             throw new Error(`${batteryPackCharacteristicsNumber} does not exist`);
@@ -46,6 +48,8 @@ class BatteryPackCharacteristics extends Contract {
     async createBatteryPackCharacteristics(ctx, batteryPackCharacteristicsNumber, BatteryAssetNumber, BatteryPackSerialNumber, BatteryPackExternalID,
         BatteryPackPartNumber, BatteryPackTypeName, BatteryPackReturnID, BatteryPackWeight, BatteryPackChemistry, BatteryPackEnergy, BatteryPackManufacturingDate, IsDamaged, EstimatedPackSOH, ServiceProviderComments,
         BatteryPackDocLink, BatteryPackRemovalDate) {
+            console.log("hello")
+            console.log(ctx);
         console.info('============= START : Create BatteryPackCharacteristics ===========');
 
         const batterypackcharacteristics = {
@@ -71,6 +75,7 @@ class BatteryPackCharacteristics extends Contract {
     }
 
     async queryAllBatteryPackCharacteristics(ctx) {
+        console.log("hello")
         const startKey = '';
         const endKey = '';
         const allResults = [];

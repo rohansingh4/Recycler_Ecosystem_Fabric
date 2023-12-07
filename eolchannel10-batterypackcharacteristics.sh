@@ -6,7 +6,7 @@ export PEER0_ORG3_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/lo
 export PEER0_ORG4_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg1.example.com/peers/peer0.restarorg1.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/artifacts/channel/config/
 
-export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config.json
+export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config10.json
 
 
 export CHANNEL_NAME1="eolchannel10"
@@ -352,24 +352,24 @@ chaincodeQuery() {
 # Run this function if you add any new dependency in chaincode
 
 #presetup
-# packageChaincode
-# installChaincode
-# queryInstalled1
-# queryInstalled2
-# queryInstalled3
-# queryInstalled4
-# approveForMyOrg1
+packageChaincode
+installChaincode
+queryInstalled1
+queryInstalled2
+queryInstalled3
+queryInstalled4
+approveForMyOrg1
 checkCommitReadyness
-# approveForMyOrg2
-# approveForMyOrg3
-# approveForMyOrg4
+approveForMyOrg2
+approveForMyOrg3
+approveForMyOrg4
 checkCommitReadyness
-# commitChaincodeDefination
-# queryCommitted
-# # queryCommitted2
-# queryCommitted3
-# queryCommitted4
-# chaincodeInvokeInit
-# sleep 5
-# chaincodeInvoke
-# sleep 3
+commitChaincodeDefination
+queryCommitted
+# queryCommitted2
+queryCommitted3
+queryCommitted4
+chaincodeInvokeInit
+sleep 5
+chaincodeInvoke
+sleep 3
