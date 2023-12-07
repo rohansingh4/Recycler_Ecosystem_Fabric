@@ -75,7 +75,6 @@ class BatteryPackCharacteristics extends Contract {
     }
 
     async queryAllBatteryPackCharacteristics(ctx) {
-        console.log("hello")
         const startKey = '';
         const endKey = '';
         const allResults = [];

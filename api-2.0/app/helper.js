@@ -39,7 +39,7 @@ const getCCP = async (org) => {
 const getCaUrl = async (org, ccp) => {
     let caURL;
     if (org == "OemOrg1") {
-        console.log(ccp.certificateAuthorities['ca.oemorg1.example.com'])
+        // console.log(ccp)
         caURL = ccp.certificateAuthorities['ca.oemorg1.example.com']?.url;
     } 
     else if (org == "ServiceOrg1") {

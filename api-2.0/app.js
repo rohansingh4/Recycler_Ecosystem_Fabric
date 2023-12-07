@@ -216,7 +216,6 @@ app.post('/channels/:channelName/chaincodes/:chaincodeName', async function (req
             res.json(getErrorMessage('\'args\''));
             return;
         }
-
         let message = await invoke.invokeTransaction(channelName, chaincodeName, fcn, args, req.username, req.orgname);
         console.log(`message result is : ${message}`)
 
