@@ -31,48 +31,49 @@ exports.createDatabaseIfNotExists = function (nano, dbname) {
 }
 
 exports.writeToCouchDB = async function (nano, dbname, key, value) {
-
-    return new Promise((async (resolve, reject) => {
-
+    return new Promise(async (resolve, reject) => {
         try {
             await this.createDatabaseIfNotExists(nano, dbname);
         } catch (error) {
-            console.log("Error creating the database-"+error)
+            console.log("Error creating the database-" + error);
         }
 
         const db = nano.use(dbname);
 
-        // If a key is not specified, then this is an insert
-        if (key == null) {
-            db.insert(value, async function (err, body, header) {
-                if (err) {
-                    reject(err);
-                }
-            }
-            );
-        } else {
-
-            // If a key is specified, then attempt to retrieve the record by key
-            db.get(key, async function (err, body) {
+        // If a key is specified, then attempt to retrieve the record by key
+        db.get(key, async function (err, body) {
+            console.log('Log before updateValue._rev assignment', body);
+            if (err == null) {
                 // parse the value
-                const updateValue = value;
-                // if the record was found, then update the revision to allow the update
-                if (err == null) {
-                    updateValue._rev = body._rev
+                const updateValue = JSON.parse(JSON.stringify(value));
+
+                // update the revision to allow the update
+                if (typeof body === 'object' && body._rev) {
+                    updateValue._rev = body._rev;
                 }
-                // update or insert the value
+
+                console.log('Log after updateValue._rev assignment', updateValue);
+                // update the value
                 db.insert(updateValue, key, async function (err, body, header) {
                     if (err) {
                         reject(err);
+                    } else {
+                        resolve(true);
                     }
                 });
-            });
-        }
-
-        resolve(true);
-
-    }));
-}
+            } else {
+                // If the record is not found, insert a new document
+                db.insert(value, key, async function (err, body, header) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(true);
+                    }
+                });
+            }
+        });
+    });
+};
 
 
 exports.deleteRecord = async function (nano, dbname, key) {
@@ -82,7 +83,7 @@ exports.deleteRecord = async function (nano, dbname, key) {
         try {
             await this.createDatabaseIfNotExists(nano, dbname);
         } catch (error) {
-            console.log("Error creating the database-"+error)
+            console.log("Error creating the database-" + error)
         }
 
         const db = nano.use(dbname);
@@ -99,13 +100,13 @@ exports.deleteRecord = async function (nano, dbname, key) {
                 db.destroy(key, revision, async function (err, body, header) {
                     if (err) {
                         reject(err);
+                    } else {
+                        resolve(true);
                     }
                 });
 
             }
         });
-
-        resolve(true);
 
     }));
 }

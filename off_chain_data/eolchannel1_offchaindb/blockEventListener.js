@@ -1,43 +1,3 @@
-/*
- * Copyright IBM Corp. All Rights Reserved.
- *
- * SPDX-License-Identifier: Apache-2.0
- *
- */
-
-/*
-
-blockEventListener.js is an nodejs application to listen for block events from
-a specified channel.
-
-Configuration is stored in config.json:
-
-{
-   "peer_name": "peer0.org1.example.com",
-   "channelid": "mychannel",
-   "use_couchdb":false,
-   "couchdb_address": "http://localhost:5990"
-}
-
-peer_name:  target peer for the listener
-channelid:  channel name for block events
-use_couchdb:  if set to true, events will be stored in a local couchdb
-couchdb_address:  local address for an off chain couchdb database
-
-Note:  If use_couchdb is set to false, only a local log of events will be stored.
-
-Usage:
-
-node bockEventListener.js
-
-The block event listener will log events received to the console and write event blocks to
-a log file based on the channelid and chaincode name.
-
-The event listener stores the next block to retrieve in a file named nextblock.txt.  This file
-is automatically created and initialized to zero if it does not exist.
-
-*/
-
 'use strict';
 
 const { Wallets, Gateway } = require('fabric-network');
@@ -60,7 +20,7 @@ const nano = require('nano')(couchdb_address);
 // simple map to hold blocks for processing
 class BlockMap {
     constructor() {
-        this.list = []
+        this.list = [];
     }
     get(key) {
         key = parseInt(key, 10).toString();
@@ -75,7 +35,7 @@ class BlockMap {
     }
 }
 
-let ProcessingMap = new BlockMap()
+let ProcessingMap = new BlockMap();
 
 async function main() {
     try {
@@ -89,7 +49,7 @@ async function main() {
             nextBlock = fs.readFileSync(configPath, 'utf8');
         } else {
             // store the next block as 0
-            fs.writeFileSync(configPath, parseInt(nextBlock, 10))
+            fs.writeFileSync(configPath, parseInt(nextBlock, 10).toString());
         }
 
         // Create a new file system based wallet for managing identities.
@@ -107,7 +67,8 @@ async function main() {
 
         // Parse the connection profile. This would be the path to the file downloaded
         // from the IBM Blockchain Platform operational console.
-        const ccpPath = path.resolve(__dirname, '../../api-2.0/config/connection-serviceorg1.json');
+        const ccpPath = path.resolve(__dirname, '/home/rohan/fabric/recycler/recycler-ecosystem/recycler_ecosystem_fabric/api-2.0/config/connection-oemorg1.json');
+        console.log("hello")
         console.log("======", ccpPath)
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
         // Create a new gateway for connecting to our peer node.
@@ -148,14 +109,15 @@ async function processPendingBlocks(ProcessingMap) {
         do {
 
             // get the next block to process from the ProcessingMap
-            processBlock = ProcessingMap.get(nextBlockNumber)
+            processBlock = ProcessingMap.get(nextBlockNumber);
 
             if (processBlock == undefined) {
                 break;
             }
 
             try {
-                await blockProcessing.processBlockEvent(channelid, processBlock, use_couchdb, nano)
+                await blockProcessing.processBlockEvent(channelid, processBlock, use_couchdb, nano);
+                console.log('Processing block:', processBlock);
             } catch (error) {
                 console.error(`Failed to process block: ${error}`);
             }
@@ -164,9 +126,9 @@ async function processPendingBlocks(ProcessingMap) {
             ProcessingMap.remove(nextBlockNumber);
 
             // increment the next block number to the next block
-            fs.writeFileSync(configPath, parseInt(nextBlockNumber, 10) + 1).toString()
+            fs.writeFileSync(configPath, (parseInt(nextBlockNumber, 10) + 1).toString());
 
-            // retrive the next block number to process
+            // retrieve the next block number to process
             nextBlockNumber = fs.readFileSync(configPath, 'utf8');
 
         } while (true);

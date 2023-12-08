@@ -117,7 +117,10 @@ exports.processBlockEvent = async function (channelname, block, use_couchdb, nan
         };
 
         // update the nextblock.txt file to retrieve the next block
-        fs.writeFileSync(configPath, parseInt(blockNumber, 10) + 1)
+        // fs.writeFileSync(configPath, parseInt(blockNumber, 10) + 1)
+        // update the nextblock.txt file to retrieve the next block
+        fs.writeFileSync(configPath, (parseInt(blockNumber, 10) + 1).toString());
+
 
         resolve(true);
 
