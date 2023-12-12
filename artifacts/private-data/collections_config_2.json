@@ -1,6 +1,6 @@
 [
     {
-         "name": "eolchannel1",
+         "name": "eolchannel2",
          "policy": "OR('ServiceOrg1MSP.member', 'RestarOrg2MSP.member')",
          "requiredPeerCount": 0,
          "maxPeerCount": 3,
