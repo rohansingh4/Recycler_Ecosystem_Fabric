@@ -1,7 +1,7 @@
 [
     {
          "name": "eolchannel1",
-         "policy": "OR('ServiceOrg1MSP.member', 'LogisticsOrg1MSP.member')",
+         "policy": "OR('ServiceOrg1MSP.member', 'RestarOrg2MSP.member')",
          "requiredPeerCount": 0,
          "maxPeerCount": 3,
          "blockToLive": 1000000,

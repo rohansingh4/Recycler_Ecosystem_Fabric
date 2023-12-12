@@ -1,4 +1,3 @@
-#!/bin/bash
 export CORE_PEER_TLS_ENABLED=true
 export ORDERER_CA=${PWD}/artifacts/channel/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 export PEER0_ORG1_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/serviceorg3.example.com/peers/peer0.serviceorg3.example.com/tls/ca.crt
@@ -6,7 +5,7 @@ export PEER0_ORG3_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/lo
 export PEER0_ORG4_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg1.example.com/peers/peer0.restarorg1.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/artifacts/channel/config/
 
-export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config10.json
+export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config_10.json
 
 
 export CHANNEL_NAME1="eolchannel10"
@@ -54,43 +53,43 @@ setGlobalsForPeer1RestarOrg1(){
     export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg1.example.com/users/Admin@restarorg1.example.com/msp
     export CORE_PEER_ADDRESS=localhost:14051
     
-}   
+}  
 # presetup
 
 CHANNEL_NAME1="eolchannel10"
 CC_RUNTIME_LANGUAGE="node"
-VERSION="1"
+VERSION="2" 
 CC_SRC_PATH="./artifacts/src/github.com/batterypackcharacteristics"
 CC_NAME="batterypackcharacteristics"
 
 packageChaincode() {
     rm -rf ${CC_NAME}.tar.gz
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode package ${CC_NAME}.tar.gz \
+    peer lifecycle chaincode package ${CC_NAME}.tar.gz \
         --path ${CC_SRC_PATH} --lang ${CC_RUNTIME_LANGUAGE} \
         --label ${CC_NAME}_${VERSION}
-    echo "===================== Chaincode is packaged on peer0.org1 ===================== "
+    echo "===================== Chaincode is packaged Peer0 ServiceOrg3 ===================== "
 }
 # packageChaincode
 
 installChaincode() {
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode install ${CC_NAME}.tar.gz
+    peer lifecycle chaincode install ${CC_NAME}.tar.gz
     echo "===================== Chaincode is installed on peer0.ServiceOrg3 ===================== "
 
     setGlobalsForPeer0LogisticsOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode install ${CC_NAME}.tar.gz
+    peer lifecycle chaincode install ${CC_NAME}.tar.gz
     echo "===================== Chaincode is installed on peer0.LogisticsOrg3 ===================== "
 
     setGlobalsForPeer0RestarOrg1
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode install ${CC_NAME}.tar.gz
+    peer lifecycle chaincode install ${CC_NAME}.tar.gz
     echo "===================== Chaincode is installed on peer0.RestarOrg1 ===================== "
 }
 # installChaincode
 
 queryInstalled1() {
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode queryinstalled >&log.txt
+    peer lifecycle chaincode queryinstalled >&log.txt
     cat log.txt
     PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
     echo PackageID is ${PACKAGE_ID}
@@ -100,7 +99,7 @@ queryInstalled1() {
 
 queryInstalled3() {
     setGlobalsForPeer0LogisticsOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode queryinstalled >&log.txt
+    peer lifecycle chaincode queryinstalled >&log.txt
     cat log.txt
     PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
     echo PackageID is ${PACKAGE_ID}
@@ -110,7 +109,7 @@ queryInstalled3() {
 
 queryInstalled4() {
     setGlobalsForPeer0RestarOrg1
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode queryinstalled >&log.txt
+    peer lifecycle chaincode queryinstalled >&log.txt
     cat log.txt
     PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
     echo PackageID is ${PACKAGE_ID}
@@ -127,7 +126,7 @@ queryInstalled4() {
 approveForMyOrg1() {
     setGlobalsForPeer0ServiceOrg3
     # set -x
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode approveformyorg -o localhost:7050 \
+    peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls \
         --collections-config $PRIVATE_DATA_CONFIG \
         --cafile $ORDERER_CA --channelID $CHANNEL_NAME1 --name ${CC_NAME} --version ${VERSION} \
@@ -146,7 +145,7 @@ getBlock() {
     #     --ordererTLSHostnameOverride orderer.example.com --tls \
     #     --cafile $ORDERER_CA
 
-    /home/rohan/fabric/fabric-samples/bin/peer channel getinfo  -c mychannel -o localhost:7050 \
+    peer channel getinfo  -c mychannel -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls \
         --cafile $ORDERER_CA
 }
@@ -161,7 +160,7 @@ getBlock() {
 
 checkCommitReadyness() {
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode checkcommitreadiness \
+    peer lifecycle chaincode checkcommitreadiness \
         --collections-config $PRIVATE_DATA_CONFIG \
         --channelID $CHANNEL_NAME1 --name ${CC_NAME} --version ${VERSION} \
         --sequence ${VERSION} --output json --init-required
@@ -187,18 +186,18 @@ checkCommitReadyness() {
 
 checkCommitReadyness() {
 
-    setGlobalsForPeer0Org1
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME1 \
+    setGlobalsForPeer0ServiceOrg3
+    peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME1 \
         --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
         --collections-config $PRIVATE_DATA_CONFIG \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
-    echo "===================== checking commit readyness from OEMOrg1 ===================== "
+    echo "===================== checking commit readyness from ServiceOrg3 ===================== "
 }
 
 approveForMyOrg3() {
     setGlobalsForPeer0LogisticsOrg3
 
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode approveformyorg -o localhost:7050 \
+    peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
         --cafile $ORDERER_CA --channelID $CHANNEL_NAME1 --name ${CC_NAME} \
         --collections-config $PRIVATE_DATA_CONFIG \
@@ -212,7 +211,7 @@ approveForMyOrg3() {
 approveForMyOrg4() {
     setGlobalsForPeer0RestarOrg1
 
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode approveformyorg -o localhost:7050 \
+    peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
         --cafile $ORDERER_CA --channelID $CHANNEL_NAME1 --name ${CC_NAME} \
         --collections-config $PRIVATE_DATA_CONFIG \
@@ -226,17 +225,17 @@ approveForMyOrg4() {
 checkCommitReadyness() {
 
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME1 \
+    peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME1 \
         --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
         --collections-config $PRIVATE_DATA_CONFIG \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
-    echo "===================== checking commit readyness from OwnerOrg1 ===================== "
+    echo "===================== checking commit readyness from ServiceOrg3 ===================== "
 }
 #checkCommitReadyness
 
 commitChaincodeDefination() {
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
+    peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
         --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA \
         --channelID $CHANNEL_NAME1 --name ${CC_NAME} \
         --collections-config $PRIVATE_DATA_CONFIG \
@@ -251,28 +250,28 @@ commitChaincodeDefination() {
 
 queryCommitted() {
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME1 --name ${CC_NAME}
+    peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME1 --name ${CC_NAME}
 
 }
 # queryCommitted
 
 queryCommitted3() {
     setGlobalsForPeer0LogisticsOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME1 --name ${CC_NAME}
+    peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME1 --name ${CC_NAME}
 
 }
 #queryCommitted3
 
 queryCommitted4() {
     setGlobalsForPeer0RestarOrg1
-    /home/rohan/fabric/fabric-samples/bin/peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME1 --name ${CC_NAME}
+    peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME1 --name ${CC_NAME}
 
 }
 #queryCommitted3
 
 chaincodeInvokeInit() {
     setGlobalsForPeer0ServiceOrg3
-    /home/rohan/fabric/fabric-samples/bin/peer chaincode invoke -o localhost:7050 \
+    peer chaincode invoke -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com \
         --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA \
         -C $CHANNEL_NAME1 -n ${CC_NAME} \
@@ -307,7 +306,7 @@ chaincodeInvoke() {
     #     -c '{"function": "createCar","Args":["Car-ABCDEEE", "Audi", "R8", "Red", "Pavan"]}'
 
     # Init ledger
-    /home/rohan/fabric/fabric-samples/bin/peer chaincode invoke -o localhost:7050 \
+    peer chaincode invoke -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com \
         --tls $CORE_PEER_TLS_ENABLED \
         --cafile $ORDERER_CA \
@@ -339,7 +338,7 @@ chaincodeQuery() {
     # peer chaincode query -C $CHANNEL_NAME1 -n ${CC_NAME} -c '{"Args":["queryAllCars"]}'
 
     # Query Car by Id
-    /home/rohan/fabric/fabric-samples/bin/peer chaincode query -C $CHANNEL_NAME1 -n ${CC_NAME} -c '{"function": "queryCar","Args":["CAR0"]}'
+    peer chaincode query -C $CHANNEL_NAME1 -n ${CC_NAME} -c '{"function": "queryCar","Args":["CAR0"]}'
     #'{"Args":["GetSampleData","Key1"]}'
 
     # Query Private Car by Id
@@ -352,24 +351,21 @@ chaincodeQuery() {
 # Run this function if you add any new dependency in chaincode
 
 #presetup
-packageChaincode
-installChaincode
-queryInstalled1
-queryInstalled2
-queryInstalled3
-queryInstalled4
-approveForMyOrg1
-checkCommitReadyness
-approveForMyOrg2
-approveForMyOrg3
-approveForMyOrg4
-checkCommitReadyness
+# packageChaincode
+# installChaincode
+# queryInstalled1
+# queryInstalled3
+# queryInstalled4
+# approveForMyOrg1
+# checkCommitReadyness
+# approveForMyOrg3
+# approveForMyOrg4
+# checkCommitReadyness
 commitChaincodeDefination
 queryCommitted
-# queryCommitted2
 queryCommitted3
 queryCommitted4
-chaincodeInvokeInit
+chaincodeInvokeInit 
 sleep 5
 chaincodeInvoke
 sleep 3

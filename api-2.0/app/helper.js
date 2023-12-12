@@ -27,6 +27,9 @@ const getCCP = async (org) => {
     else if (org == "RestarOrg1") {
         ccpPath = path.resolve(__dirname, '..', 'config', 'connection-restarorg1.json');
     }
+    else if (org == "RestarOrg2") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-restarorg2.json');
+    }
      
     else
         return null
@@ -57,6 +60,9 @@ const getCaUrl = async (org, ccp) => {
     else if (org == "RestarOrg1") {
         caURL = ccp.certificateAuthorities['ca.restarorg1.example.com'].url;
     } 
+    else if (org == "RestarOrg2") {
+        caURL = ccp.certificateAuthorities['ca.restarorg2.example.com'].url;
+    } 
     else
         return null
     return caURL
@@ -83,6 +89,9 @@ const getWalletPath = async (org) => {
     else if (org == "RestarOrg1") {
         walletPath = path.join(process.cwd(), 'RestarOrg1-wallet');
     } 
+    else if (org == "RestarOrg2") {
+        walletPath = path.join(process.cwd(), 'RestarOrg2-wallet');
+    } 
     else
         return null
     return walletPath
@@ -98,6 +107,7 @@ const getRegisteredUser = async (username, userOrg, isJson) => {
     let ccp = await getCCP(userOrg)
 
     const caURL = await getCaUrl(userOrg, ccp)
+    console.log("caurl", caURL)
     const ca = new FabricCAServices(caURL);
 
     const walletPath = await getWalletPath(userOrg)
@@ -200,6 +210,16 @@ const getRegisteredUser = async (username, userOrg, isJson) => {
             type: 'X.509',
         };
     }
+    else if (userOrg == "RestarOrg2") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'RestarOrg2MSP',
+            type: 'X.509',
+        };
+    }
 
     await wallet.put(username, x509Identity);
     console.log(`Successfully registered and enrolled admin user ${username} and imported it into the wallet`);
@@ -244,6 +264,9 @@ const getCaInfo = async (org, ccp) => {
     } 
     else if (org == "RestarOrg1") {
         caInfo = ccp.certificateAuthorities['ca.restarorg1.example.com'];
+    } 
+    else if (org == "RestarOrg2") {
+        caInfo = ccp.certificateAuthorities['ca.restarorg2.example.com'];
     } 
     else
         return null
@@ -333,6 +356,16 @@ const enrollAdmin = async (org, ccp) => {
                     privateKey: enrollment.key.toBytes(),
                 },
                 mspId: 'RestarOrg1MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "RestarOrg2") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'RestarOrg2MSP',
                 type: 'X.509',
             };
         }
