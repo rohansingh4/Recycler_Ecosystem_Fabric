@@ -18,16 +18,16 @@ function json_ccp {
         ./ccp-template.json
 }
 
-# ORG=1
-# P0PORT=9051
-# CAPORT=8054
-# P0PORT1=10051
-# PEERPEM=../../artifacts/channel/crypto-config/peerOrganizations/oemorg1.example.com/peers/peer0.oemorg1.example.com/msp/tlscacerts/tlsca.oemorg1.example.com-cert.pem
-# PEERPEM1=../../artifacts/channel/crypto-config/peerOrganizations/oemorg1.example.com/peers/peer1.oemorg1.example.com/msp/tlscacerts/tlsca.oemorg1.example.com-cert.pem
-# CAPEM=../../artifacts/channel/crypto-config/peerOrganizations/oemorg1.example.com/msp/tlscacerts/tlsca.oemorg1.example.com-cert.pem
+ORG=1
+P0PORT=9051
+CAPORT=8054
+P0PORT1=10051
+PEERPEM=../../artifacts/channel/crypto-config/peerOrganizations/oemorg1.example.com/peers/peer0.oemorg1.example.com/msp/tlscacerts/tlsca.oemorg1.example.com-cert.pem
+PEERPEM1=../../artifacts/channel/crypto-config/peerOrganizations/oemorg1.example.com/peers/peer1.oemorg1.example.com/msp/tlscacerts/tlsca.oemorg1.example.com-cert.pem
+CAPEM=../../artifacts/channel/crypto-config/peerOrganizations/oemorg1.example.com/msp/tlscacerts/tlsca.oemorg1.example.com-cert.pem
 
 
-# echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $PEERPEM1 $P0PORT1)" > connection-oemorg1.json
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $PEERPEM1 $P0PORT1)" > connection-oemorg1.json
 
 # ORG=2
 # P0PORT=7051
