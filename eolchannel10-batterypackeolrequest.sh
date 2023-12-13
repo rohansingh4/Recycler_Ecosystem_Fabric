@@ -1,7 +1,7 @@
 export CORE_PEER_TLS_ENABLED=true
 export ORDERER_CA=${PWD}/artifacts/channel/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
-export PEER0_ORG1_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/serviceorg3.example.com/peers/peer0.serviceorg3.example.com/tls/ca.crt
-export PEER0_ORG3_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/logisticsorg3.example.com/peers/peer0.logisticsorg3.example.com/tls/ca.crt
+export PEER0_ORG7_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/serviceorg3.example.com/peers/peer0.serviceorg3.example.com/tls/ca.crt
+export PEER0_ORG11_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/logisticsorg3.example.com/peers/peer0.logisticsorg3.example.com/tls/ca.crt
 export PEER0_ORG4_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg1.example.com/peers/peer0.restarorg1.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/artifacts/channel/config/
 
@@ -12,32 +12,30 @@ export CHANNEL_NAME1="eolchannel10"
 
 setGlobalsForPeer0ServiceOrg3(){
     export CORE_PEER_LOCALMSPID="ServiceOrg3MSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG1_CA
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG7_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/serviceorg3.example.com/users/Admin@serviceorg3.example.com/msp
     export CORE_PEER_ADDRESS=localhost:19051
 }
 
 setGlobalsForPeer1ServiceOrg3(){
     export CORE_PEER_LOCALMSPID="ServiceOrg3MSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG1_CA
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG7_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/serviceorg3.example.com/users/Admin@serviceorg3.example.com/msp
     export CORE_PEER_ADDRESS=localhost:20051
-    
 }
 
 setGlobalsForPeer0LogisticsOrg3(){
     export CORE_PEER_LOCALMSPID="LogisticsOrg3MSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG11_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/logisticsorg3.example.com/users/Admin@logisticsorg3.example.com/msp
     export CORE_PEER_ADDRESS=localhost:27051
 }
 
 setGlobalsForPeer1LogisticsOrg3(){
     export CORE_PEER_LOCALMSPID="LogisticsOrg3MSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG11_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/logisticsorg3.example.com/users/Admin@logisticsorg3.example.com/msp
-    export CORE_PEER_ADDRESS=localhost:28051
-    
+    export CORE_PEER_ADDRESS=localhost:28051   
 }
 
 setGlobalsForPeer0RestarOrg1(){
@@ -53,17 +51,18 @@ setGlobalsForPeer1RestarOrg1(){
     export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg1.example.com/users/Admin@restarorg1.example.com/msp
     export CORE_PEER_ADDRESS=localhost:14051
     
-}  
+}
+
 # presetup
 
 CHANNEL_NAME1="eolchannel10"
 CC_RUNTIME_LANGUAGE="node"
-VERSION="1" 
+VERSION="4" 
 CC_SRC_PATH="./artifacts/src/github.com/batterypackeolrequest"
 CC_NAME="batterypackeolrequest"
 
 packageChaincode() {
-    # rm -rf ${CC_NAME}.tar.gz
+    rm -rf ${CC_NAME}.tar.gz
     setGlobalsForPeer0ServiceOrg3
     peer lifecycle chaincode package ${CC_NAME}.tar.gz \
         --path ${CC_SRC_PATH} --lang ${CC_RUNTIME_LANGUAGE} \
@@ -153,8 +152,8 @@ getBlock() {
 # getBlock
 
 # --signature-policy "OR ('Org1MSP.member')"
-# --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA
-# --peerAddresses peer0.org1.example.com:19051 --tlsRootCertFiles $PEER0_ORG1_CA --peerAddresses peer0.org2.example.com:9051 --tlsRootCertFiles $PEER0_ORG2_CA
+# --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG11_CA
+# --peerAddresses peer0.org1.example.com:19051 --tlsRootCertFiles $PEER0_ORG7_CA --peerAddresses peer0.org2.example.com:9051 --tlsRootCertFiles $PEER0_ORG11_CA
 #--channel-config-policy Channel/Application/Admins
 # --signature-policy "OR ('Org1MSP.peer','Org2MSP.peer')"
 
@@ -188,7 +187,7 @@ checkCommitReadyness() {
 
     setGlobalsForPeer0ServiceOrg3
     peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME1 \
-        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
+        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA \
         --collections-config $PRIVATE_DATA_CONFIG \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
     echo "===================== checking commit readyness from ServiceOrg3 ===================== "
@@ -226,7 +225,7 @@ checkCommitReadyness() {
 
     setGlobalsForPeer0ServiceOrg3
     peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME1 \
-        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
+        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA \
         --collections-config $PRIVATE_DATA_CONFIG \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
     echo "===================== checking commit readyness from ServiceOrg3 ===================== "
@@ -239,8 +238,8 @@ commitChaincodeDefination() {
         --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA \
         --channelID $CHANNEL_NAME1 --name ${CC_NAME} \
         --collections-config $PRIVATE_DATA_CONFIG \
-        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
-        --peerAddresses localhost:27051 --tlsRootCertFiles $PEER0_ORG3_CA \
+        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA \
+        --peerAddresses localhost:27051 --tlsRootCertFiles $PEER0_ORG11_CA \
         --peerAddresses localhost:13051 --tlsRootCertFiles $PEER0_ORG4_CA \
         --version ${VERSION} --sequence ${VERSION} --init-required
 
@@ -275,8 +274,8 @@ chaincodeInvokeInit() {
         --ordererTLSHostnameOverride orderer.example.com \
         --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA \
         -C $CHANNEL_NAME1 -n ${CC_NAME} \
-        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
-        --peerAddresses localhost:27051 --tlsRootCertFiles $PEER0_ORG3_CA \
+        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA \
+        --peerAddresses localhost:27051 --tlsRootCertFiles $PEER0_ORG11_CA \
         --peerAddresses localhost:13051 --tlsRootCertFiles $PEER0_ORG4_CA \
         --isInit -c '{"Args":[]}'
 
@@ -288,8 +287,8 @@ chaincodeInvoke() {
     # setGlobalsForPeer0Org1
     # peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
     # --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME1 -n ${CC_NAME} \
-    # --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
-    # --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA  \
+    # --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA \
+    # --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG11_CA  \
     # -c '{"function":"initLedger","Args":[]}'
 
     setGlobalsForPeer0ServiceOrg3
@@ -301,8 +300,8 @@ chaincodeInvoke() {
     #     --cafile $ORDERER_CA \
     #     -C $CHANNEL_NAME1 -n ${CC_NAME}  \
     #     --peerAddresses localhost:19051 \
-    #     --tlsRootCertFiles $PEER0_ORG1_CA \
-    #     --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA   \
+    #     --tlsRootCertFiles $PEER0_ORG7_CA \
+    #     --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG11_CA   \
     #     -c '{"function": "createCar","Args":["Car-ABCDEEE", "Audi", "R8", "Red", "Pavan"]}'
 
     # Init ledger
@@ -311,8 +310,8 @@ chaincodeInvoke() {
         --tls $CORE_PEER_TLS_ENABLED \
         --cafile $ORDERER_CA \
         -C $CHANNEL_NAME1 -n ${CC_NAME} \
-        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
-        --peerAddresses localhost:27051 --tlsRootCertFiles $PEER0_ORG3_CA \
+        --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA \
+        --peerAddresses localhost:27051 --tlsRootCertFiles $PEER0_ORG11_CA \
         --peerAddresses localhost:13051 --tlsRootCertFiles $PEER0_ORG4_CA \
         -c '{"function": "initLedger","Args":[]}'
 
@@ -323,8 +322,8 @@ chaincodeInvoke() {
     #     --tls $CORE_PEER_TLS_ENABLED \
     #     --cafile $ORDERER_CA \
     #     -C $CHANNEL_NAME1 -n ${CC_NAME} \
-    #     --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG1_CA \
-    #     --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA \
+    #     --peerAddresses localhost:19051 --tlsRootCertFiles $PEER0_ORG7_CA \
+    #     --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG11_CA \
     #     -c '{"function": "createPrivateCar", "Args":[]}' \
     #     --transient "{\"car\":\"$CAR\"}"
 }
