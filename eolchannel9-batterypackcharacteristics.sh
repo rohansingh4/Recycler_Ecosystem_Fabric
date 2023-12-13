@@ -7,7 +7,7 @@ export PEER0_ORG10_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/l
 export PEER0_ORG6_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg3.example.com/peers/peer0.restarorg3.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/artifacts/channel/config/
 
-export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config_8.json
+export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config_9.json
 
 export CHANNEL_NAME1="eolchannel9"
 
@@ -76,7 +76,7 @@ setGlobalsForPeer1RestarOrg3(){
 
 CHANNEL_NAME1="eolchannel9"
 CC_RUNTIME_LANGUAGE="node"
-VERSION="1"
+VERSION="4"
 CC_SRC_PATH="./artifacts/src/github.com/batterypackcharacteristics"
 CC_NAME="batterypackcharacteristics"
 
@@ -103,9 +103,9 @@ installChaincode() {
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
     echo "===================== Chaincode is installed on peer0.LogisticsOrg2 ===================== "
 
-    setGlobalsForPeer0RestarOrg2
+    setGlobalsForPeer0RestarOrg3
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
-    echo "===================== Chaincode is installed on peer0.RestarOrg2 ===================== "
+    echo "===================== Chaincode is installed on peer0.RestarOrg3 ===================== "
 }
 # installChaincode
 
@@ -140,12 +140,12 @@ queryInstalled3() {
 # queryInstalled3
 
 queryInstalled4() {
-    setGlobalsForPeer0RestarOrg2
+    setGlobalsForPeer0RestarOrg3
     peer lifecycle chaincode queryinstalled >&log.txt
     cat log.txt
     PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
     echo PackageID is ${PACKAGE_ID}
-    echo "===================== Query installed successful on peer0.RestarOrg2 on channel ===================== "
+    echo "===================== Query installed successful on peer0.RestarOrg3 on channel ===================== "
 }
 # queryInstalled4
 
@@ -241,7 +241,7 @@ approveForMyOrg3() {
 # approveForMyOrg3
 
 approveForMyOrg4() {
-    setGlobalsForPeer0RestarOrg2
+    setGlobalsForPeer0RestarOrg3
 
     peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
@@ -250,7 +250,7 @@ approveForMyOrg4() {
         --version ${VERSION} --init-required --package-id ${PACKAGE_ID} \
         --sequence ${VERSION}
 
-    echo "===================== chaincode approved from RestarOrg2 ===================== "
+    echo "===================== chaincode approved from RestarOrg3 ===================== "
 }
 # approveForMyOrg4
 
@@ -274,7 +274,7 @@ commitChaincodeDefination() {
         --peerAddresses localhost:21051 --tlsRootCertFiles $PEER0_ORG8_CA \
         --peerAddresses localhost:23051 --tlsRootCertFiles $PEER0_ORG9_CA \
         --peerAddresses localhost:25051 --tlsRootCertFiles $PEER0_ORG10_CA \
-        --peerAddresses localhost:15051 --tlsRootCertFiles $PEER0_ORG5_CA \
+        --peerAddresses localhost:17051 --tlsRootCertFiles $PEER0_ORG6_CA \
         --version ${VERSION} --sequence ${VERSION} --init-required
 
 }
@@ -303,7 +303,7 @@ queryCommitted3() {
 #queryCommitted3
 
 queryCommitted4() {
-    setGlobalsForPeer0RestarOrg2
+    setGlobalsForPeer0RestarOrg3
     peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME1 --name ${CC_NAME}
 
 }
@@ -318,7 +318,7 @@ chaincodeInvokeInit() {
         --peerAddresses localhost:21051 --tlsRootCertFiles $PEER0_ORG8_CA \
         --peerAddresses localhost:23051 --tlsRootCertFiles $PEER0_ORG9_CA \
         --peerAddresses localhost:25051 --tlsRootCertFiles $PEER0_ORG10_CA \
-        --peerAddresses localhost:15051 --tlsRootCertFiles $PEER0_ORG5_CA \
+        --peerAddresses localhost:17051 --tlsRootCertFiles $PEER0_ORG6_CA \
         --isInit -c '{"Args":[]}'
 
 }
@@ -355,7 +355,7 @@ chaincodeInvoke() {
         --peerAddresses localhost:21051 --tlsRootCertFiles $PEER0_ORG8_CA \
         --peerAddresses localhost:23051 --tlsRootCertFiles $PEER0_ORG9_CA \
         --peerAddresses localhost:25051 --tlsRootCertFiles $PEER0_ORG10_CA \
-        --peerAddresses localhost:15051 --tlsRootCertFiles $PEER0_ORG5_CA \
+        --peerAddresses localhost:17051 --tlsRootCertFiles $PEER0_ORG6_CA \
         -c '{"function": "initLedger","Args":[]}'
 
     # ## Add private data

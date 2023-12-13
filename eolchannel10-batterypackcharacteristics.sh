@@ -1,8 +1,6 @@
 export CORE_PEER_TLS_ENABLED=true
 export ORDERER_CA=${PWD}/artifacts/channel/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
-export PEER0_ORG1_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/serviceorg3.example.com/peers/peer0.serviceorg3.example.com/tls/ca.crt
-export PEER0_ORG3_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/logisticsorg3.example.com/peers/peer0.logisticsorg3.example.com/tls/ca.crt
-export PEER0_ORG4_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/restarorg1.example.com/peers/peer0.restarorg1.example.com/tls/ca.crt
+
 export FABRIC_CFG_PATH=${PWD}/artifacts/channel/config/
 
 export PRIVATE_DATA_CONFIG=${PWD}/artifacts/private-data/collections_config_10.json
@@ -351,16 +349,16 @@ chaincodeQuery() {
 # Run this function if you add any new dependency in chaincode
 
 #presetup
-# packageChaincode
-# installChaincode
-# queryInstalled1
-# queryInstalled3
-# queryInstalled4
-# approveForMyOrg1
-# checkCommitReadyness
-# approveForMyOrg3
-# approveForMyOrg4
-# checkCommitReadyness
+packageChaincode
+installChaincode
+queryInstalled1
+queryInstalled3
+queryInstalled4
+approveForMyOrg1
+checkCommitReadyness
+approveForMyOrg3
+approveForMyOrg4
+checkCommitReadyness
 commitChaincodeDefination
 queryCommitted
 queryCommitted3
