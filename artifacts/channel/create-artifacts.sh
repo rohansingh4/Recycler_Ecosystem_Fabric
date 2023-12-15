@@ -47,7 +47,7 @@ echo "#######    Generating anchor peer update for ServiceOrg3MSP  ##########"
 configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./ServiceOrg3MSPanchors.tx -channelID $CHANNEL_NAME -asOrg ServiceOrg3MSP
 
 echo "#######    Generating anchor peer update for ServiceOrg2MSP  ##########"
-configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./BatteryOrg1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg ServiceOrg2MSP
+configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./ServiceOrg2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg ServiceOrg2MSP
 
 echo "#######    Generating anchor peer update for OEMOrg2MSP  ##########"
 configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./OEMOrg2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg OEMOrg2MSP
