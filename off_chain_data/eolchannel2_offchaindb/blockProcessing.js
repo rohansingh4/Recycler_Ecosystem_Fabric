@@ -93,6 +93,7 @@ exports.processBlockEvent = async function (channelname, block, use_couchdb, nan
                         writeObject.chaincodeid = chaincodeID;
                         writeObject.timestamp = timestamp;
                         writeObject.values = rwSet[record].rwset.writes;
+                        //JSON.stringify(writeObject.values);
 
                         console.log(`Transaction Timestamp: ${writeObject.timestamp}`);
                         console.log(`ChaincodeID: ${writeObject.chaincodeid}`);

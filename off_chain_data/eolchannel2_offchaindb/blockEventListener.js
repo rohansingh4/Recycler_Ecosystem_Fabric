@@ -94,6 +94,7 @@ async function main() {
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
+        console.log()
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
@@ -107,14 +108,14 @@ async function main() {
 
         // Parse the connection profile. This would be the path to the file downloaded
         // from the IBM Blockchain Platform operational console.
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network','organizations','peerOrganizations','org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '../../api-2.0/config/connection-serviceorg1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true, asLocalhost: true } });
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
+        const network = await gateway.getNetwork('eolchannel2');
 
         const listener = async (event) => {
             // Add the block to the processing map by block number
