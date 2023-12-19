@@ -93,7 +93,6 @@ exports.processBlockEvent = async function (channelname, block, use_couchdb, nan
                         writeObject.chaincodeid = chaincodeID;
                         writeObject.timestamp = timestamp;
                         writeObject.values = rwSet[record].rwset.writes;
-                        //JSON.stringify(writeObject.values);
 
                         console.log(`Transaction Timestamp: ${writeObject.timestamp}`);
                         console.log(`ChaincodeID: ${writeObject.chaincodeid}`);
@@ -118,7 +117,8 @@ exports.processBlockEvent = async function (channelname, block, use_couchdb, nan
         };
 
         // update the nextblock.txt file to retrieve the next block
-        fs.writeFileSync(configPath, parseInt(blockNumber, 10) + 1)
+        // fs.writeFileSync(configPath, parseInt(blockNumber, 10) + 1)
+        fs.writeFileSync(configPath, (parseInt(blockNumber, 10) + 1).toString());
 
         resolve(true);
 

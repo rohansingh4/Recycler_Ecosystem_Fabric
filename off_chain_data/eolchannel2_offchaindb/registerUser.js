@@ -27,9 +27,9 @@ async function main() {
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
-        const userExists = await wallet.get('appUser');
+        const userExists = await wallet.get('appUser2');
         if (userExists) {
-            console.log('An identity for the user "appUser" already exists in the wallet');
+            console.log('An identity for the user "appUser2" already exists in the wallet');
             return;
         }
 
@@ -48,11 +48,11 @@ async function main() {
         // Register the user, enroll the user, and import the new identity into the wallet.
         const secret = await ca.register({
             affiliation: 'org1.department1',
-            enrollmentID: 'appUser',
+            enrollmentID: 'appUser2',
             role: 'client'
         }, adminUser);
         const enrollment = await ca.enroll({
-            enrollmentID: 'appUser',
+            enrollmentID: 'appUser2',
             enrollmentSecret: secret
         });
         const x509Identity = {
@@ -63,13 +63,19 @@ async function main() {
             mspId: 'ServiceOrg1MSP',
             type: 'X.509',
         };
-        await wallet.put('appUser', x509Identity);
-        console.log('Successfully registered and enrolled admin user "appUser" and imported it into the wallet');
+        await wallet.put('appUser2', x509Identity);
+        console.log('Successfully registered and enrolled admin user "appUser2" and imported it into the wallet');
 
     } catch (error) {
-        console.error(`Failed to register user "appUser": ${error}`);
+        console.error(`Failed to register user "appUser2": ${error}`);
         process.exit(1);
     }
 }
 
 main();
+
+
+// rohan@rohan:~/fabric/recycler/recycler-ecosystem/recycler_ecosystem_fabric/off_chain_data/legacy-application-javascript$ node registerUser.js
+// Wallet path: /home/rohan/fabric/recycler/recycler-ecosystem/recycler_ecosystem_fabric/off_chain_data/legacy-application-javascript/wallet
+// Successfully registered and enrolled admin user "appUser2" and imported it into the wallet
+// rohan@rohan:~/fabric/recycler/recycler-ecosystem/recycler_ecosystem_fabric/off_chain_data/legacy-application-javascript$
