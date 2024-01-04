@@ -9,12 +9,44 @@ const util = require('util');
 
 const getCCP = async (org) => {
     let ccpPath;
-    if (org == "Org1") {
-        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-org1.json');
-
-    } else if (org == "Org2") {
-        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-org2.json');
-    } else
+    if (org == "OemOrg1") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-oemorg1.json');
+    } 
+    else if (org == "OemOrg2") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-oemorg2.json');
+    } 
+    else if (org == "ServiceOrg1") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-serviceorg1.json');
+    }
+    else if (org == "ServiceOrg2") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-serviceorg2.json');
+    }
+    else if (org == "ServiceOrg3") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-serviceorg3.json');
+    }
+    else if (org == "ServiceOrg4") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-serviceorg4.json');
+    }
+    else if (org == "LogisticsOrg1") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-logisticsorg1.json');
+    }
+    else if (org == "LogisticsOrg2") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-logisticsorg2.json');
+    }
+    else if (org == "LogisticsOrg3") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-logisticsorg3.json');
+    }
+    else if (org == "RestarOrg1") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-restarorg1.json');
+    }
+    else if (org == "RestarOrg2") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-restarorg2.json');
+    }
+    else if (org == "RestarOrg3") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-restarorg3.json');
+    }
+     
+    else
         return null
     const ccpJSON = fs.readFileSync(ccpPath, 'utf8')
     const ccp = JSON.parse(ccpJSON);
@@ -23,12 +55,43 @@ const getCCP = async (org) => {
 
 const getCaUrl = async (org, ccp) => {
     let caURL;
-    if (org == "Org1") {
-        caURL = ccp.certificateAuthorities['ca.org1.example.com'].url;
-
-    } else if (org == "Org2") {
-        caURL = ccp.certificateAuthorities['ca.org2.example.com'].url;
-    } else
+    if (org == "OemOrg1") {
+        caURL = ccp.certificateAuthorities['ca.oemorg1.example.com'].url;
+    } 
+    else if (org == "OemOrg2") {
+        caURL = ccp.certificateAuthorities['ca.oemorg2.example.com'].url;
+    } 
+    else if (org == "ServiceOrg1") {
+        caURL = ccp.certificateAuthorities['ca.serviceorg1.example.com'].url;
+    }
+    else if (org == "ServiceOrg2") {
+        caURL = ccp.certificateAuthorities['ca.serviceorg2.example.com'].url;
+    }
+    else if (org == "ServiceOrg3") {
+        caURL = ccp.certificateAuthorities['ca.serviceorg3.example.com'].url;
+    }
+    else if (org == "ServiceOrg4") {
+        caURL = ccp.certificateAuthorities['ca.serviceorg4.example.com'].url;
+    } 
+    else if (org == "LogisticsOrg1") {
+        caURL = ccp.certificateAuthorities['ca.logisticsorg1.example.com'].url;
+    }
+    else if (org == "LogisticsOrg2") {
+        caURL = ccp.certificateAuthorities['ca.logisticsorg2.example.com'].url;
+    }
+    else if (org == "LogisticsOrg3") {
+        caURL = ccp.certificateAuthorities['ca.logisticsorg3.example.com'].url;
+    } 
+    else if (org == "RestarOrg1") {
+        caURL = ccp.certificateAuthorities['ca.restarorg1.example.com'].url;
+    } 
+    else if (org == "RestarOrg2") {
+        caURL = ccp.certificateAuthorities['ca.restarorg2.example.com'].url;
+    } 
+    else if (org == "RestarOrg3") {
+        caURL = ccp.certificateAuthorities['ca.restarorg3.example.com'].url;
+    } 
+    else
         return null
     return caURL
 
@@ -36,12 +99,43 @@ const getCaUrl = async (org, ccp) => {
 
 const getWalletPath = async (org) => {
     let walletPath;
-    if (org == "Org1") {
-        walletPath = path.join(process.cwd(), 'org1-wallet');
-
-    } else if (org == "Org2") {
-        walletPath = path.join(process.cwd(), 'org2-wallet');
-    } else
+    if (org == "OemOrg1") {
+        walletPath = path.join(process.cwd(), 'OemOrg1-wallet');
+    } 
+    else if (org == "OemOrg2") {
+        walletPath = path.join(process.cwd(), 'OemOrg2-wallet');
+    } 
+    else if (org == "ServiceOrg1") {
+        walletPath = path.join(process.cwd(), 'ServiceOrg1-wallet');
+    }
+    else if (org == "ServiceOrg2") {
+        walletPath = path.join(process.cwd(), 'ServiceOrg2-wallet');
+    }
+    else if (org == "ServiceOrg3") {
+        walletPath = path.join(process.cwd(), 'ServiceOrg3-wallet');
+    } 
+    else if (org == "ServiceOrg4") {
+        walletPath = path.join(process.cwd(), 'ServiceOrg4-wallet');
+    } 
+    else if (org == "LogisticsOrg1") {
+        walletPath = path.join(process.cwd(), 'LogisticsOrg1-wallet');
+    }
+    else if (org == "LogisticsOrg2") {
+        walletPath = path.join(process.cwd(), 'LogisticsOrg2-wallet');
+    }
+    else if (org == "LogisticsOrg3") {
+        walletPath = path.join(process.cwd(), 'LogisticsOrg3-wallet');
+    } 
+    else if (org == "RestarOrg1") {
+        walletPath = path.join(process.cwd(), 'RestarOrg1-wallet');
+    } 
+    else if (org == "RestarOrg2") {
+        walletPath = path.join(process.cwd(), 'RestarOrg2-wallet');
+    } 
+    else if (org == "RestarOrg3") {
+        walletPath = path.join(process.cwd(), 'RestarOrg3-wallet');
+    } 
+    else
         return null
     return walletPath
 
@@ -98,22 +192,123 @@ const getRegisteredUser = async (username, userOrg, isJson) => {
     // const enrollment = await ca.enroll({ enrollmentID: username, enrollmentSecret: secret, attr_reqs: [{ name: 'role', optional: false }] });
 
     let x509Identity;
-    if (userOrg == "Org1") {
+    if (userOrg == "OemOrg1") {
         x509Identity = {
             credentials: {
                 certificate: enrollment.certificate,
                 privateKey: enrollment.key.toBytes(),
             },
-            mspId: 'Org1MSP',
+            mspId: 'OEMOrg1MSP',
             type: 'X.509',
         };
-    } else if (userOrg == "Org2") {
+    } 
+    else if (userOrg == "OemOrg2") {
         x509Identity = {
             credentials: {
                 certificate: enrollment.certificate,
                 privateKey: enrollment.key.toBytes(),
             },
-            mspId: 'Org2MSP',
+            mspId: 'OEMOrg2MSP',
+            type: 'X.509',
+        };
+    } 
+    else if (userOrg == "ServiceOrg1") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'ServiceOrg1MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "ServiceOrg2") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'ServiceOrg2MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "ServiceOrg3") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'ServiceOrg3MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "ServiceOrg4") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'ServiceOrg4MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "LogisticsOrg1") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'LogisticsOrg1MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "LogisticsOrg2") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'LogisticsOrg2MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "LogisticsOrg3") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'LogisticsOrg3MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "RestarOrg1") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'RestarOrg1MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "RestarOrg2") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'RestarOrg2MSP',
+            type: 'X.509',
+        };
+    }
+    else if (userOrg == "RestarOrg3") {
+        x509Identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes(),
+            },
+            mspId: 'RestarOrg3MSP',
             type: 'X.509',
         };
     }
@@ -144,12 +339,43 @@ const isUserRegistered = async (username, userOrg) => {
 
 const getCaInfo = async (org, ccp) => {
     let caInfo
-    if (org == "Org1") {
-        caInfo = ccp.certificateAuthorities['ca.org1.example.com'];
-
-    } else if (org == "Org2") {
-        caInfo = ccp.certificateAuthorities['ca.org2.example.com'];
-    } else
+    if (org == "OemOrg1") {
+        caInfo = ccp.certificateAuthorities['ca.oemorg1.example.com'];
+    } 
+    else if (org == "OemOrg2") {
+        caInfo = ccp.certificateAuthorities['ca.oemorg2.example.com'];
+    } 
+    else if (org == "ServiceOrg1") {
+        caInfo = ccp.certificateAuthorities['ca.serviceorg1.example.com'];
+    }
+    else if (org == "ServiceOrg2") {
+        caInfo = ccp.certificateAuthorities['ca.serviceorg2.example.com'];
+    }
+    else if (org == "ServiceOrg3") {
+        caInfo = ccp.certificateAuthorities['ca.serviceorg3.example.com'];
+    } 
+    else if (org == "ServiceOrg4") {
+        caInfo = ccp.certificateAuthorities['ca.serviceorg4.example.com'];
+    } 
+    else if (org == "LogisticsOrg1") {
+        caInfo = ccp.certificateAuthorities['ca.logisticsorg1.example.com'];
+    }
+    else if (org == "LogisticsOrg2") {
+        caInfo = ccp.certificateAuthorities['ca.logisticsorg2.example.com'];
+    }
+    else if (org == "LogisticsOrg3") {
+        caInfo = ccp.certificateAuthorities['ca.logisticsorg3.example.com'];
+    } 
+    else if (org == "RestarOrg1") {
+        caInfo = ccp.certificateAuthorities['ca.restarorg1.example.com'];
+    } 
+    else if (org == "RestarOrg2") {
+        caInfo = ccp.certificateAuthorities['ca.restarorg2.example.com'];
+    } 
+    else if (org == "RestarOrg3") {
+        caInfo = ccp.certificateAuthorities['ca.restarorg3.example.com'];
+    } 
+    else
         return null
     return caInfo
 
@@ -180,25 +406,128 @@ const enrollAdmin = async (org, ccp) => {
         // Enroll the admin user, and import the new identity into the wallet.
         const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
         let x509Identity;
-        if (org == "Org1") {
+
+        if (org == "OemOrg1") {
             x509Identity = {
                 credentials: {
                     certificate: enrollment.certificate,
                     privateKey: enrollment.key.toBytes(),
                 },
-                mspId: 'Org1MSP',
+                mspId: 'OEMOrg1MSP',
                 type: 'X.509',
             };
-        } else if (org == "Org2") {
+        } 
+        else if (org == "OemOrg2") {
             x509Identity = {
                 credentials: {
                     certificate: enrollment.certificate,
                     privateKey: enrollment.key.toBytes(),
                 },
-                mspId: 'Org2MSP',
+                mspId: 'OEMOrg2MSP',
+                type: 'X.509',
+            };
+        } 
+        else if (org == "ServiceOrg1") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'ServiceOrg1MSP',
                 type: 'X.509',
             };
         }
+        else if (org == "ServiceOrg2") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'ServiceOrg2MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "ServiceOrg3") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'ServiceOrg3MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "ServiceOrg4") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'ServiceOrg4MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "LogisticsOrg1") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'LogisticsOrg1MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "LogisticsOrg2") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'LogisticsOrg2MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "LogisticsOrg3") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'LogisticsOrg3MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "RestarOrg1") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'RestarOrg1MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "RestarOrg2") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'RestarOrg2MSP',
+                type: 'X.509',
+            };
+        }
+        else if (org == "RestarOrg3") {
+            x509Identity = {
+                credentials: {
+                    certificate: enrollment.certificate,
+                    privateKey: enrollment.key.toBytes(),
+                },
+                mspId: 'RestarOrg3MSP',
+                type: 'X.509',
+            };
+        }
+        
 
         await wallet.put('admin', x509Identity);
         console.log('Successfully enrolled admin user "admin" and imported it into the wallet');

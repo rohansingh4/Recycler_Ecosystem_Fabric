@@ -1,0 +1,62 @@
+{
+    "name": "first-network-logisticsorg2",
+    "version": "1.0.0",
+    "client": {
+        "organization": "LogisticsOrg2",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "logisticsorg2": {
+            "mspid": "LogisticsOrg2MSP",
+            "peers": [
+                "peer0.logisticsorg2.example.com",
+                "peer1.logisticsorg2.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.logisticsorg2.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.logisticsorg2.example.com": {
+            "url": "grpcs://localhost:25051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICfjCCAiSgAwIBAgIRANQd9eGD/F1FK4DQo0zKm1swCgYIKoZIzj0EAwIwgYgx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSIwIAYDVQQKExlsb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMSgw\nJgYDVQQDEx90bHNjYS5sb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMB4XDTI0MDEw\nMzE2MDMwMFoXDTMzMTIzMTE2MDMwMFowgYgxCzAJBgNVBAYTAlVTMRMwEQYDVQQI\nEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSIwIAYDVQQKExls\nb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMSgwJgYDVQQDEx90bHNjYS5sb2dpc3Rp\nY3NvcmcyLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEiupc\nh+c3geRPcUo7Mcv/M4RJ9nLLcTjawOaC3gRYLxnCr3Uq1W1Bt5XVy54n2Qlm+jh/\nU9AZPepNpqGuW3UL06NtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsG\nAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCCmDZBp\nvG0okkIRx0AauuVUO8QwCOex3RIVjHYsUYNW+jAKBggqhkjOPQQDAgNIADBFAiEA\nkSGaPDXb7VJbUz8EQ3/2mztGXXbUCDNFVbTL8GcAwiwCIDGUDM+Dov0OB2/spEWt\nOp50tPj/NTAShVTBgioopzBV\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.logisticsorg2.example.com",
+                "hostnameOverride": "peer0.logisticsorg2.example.com"
+            }
+        },
+	"peer1.logisticsorg2.example.com": {
+            "url": "grpcs://localhost:26051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICfjCCAiSgAwIBAgIRANQd9eGD/F1FK4DQo0zKm1swCgYIKoZIzj0EAwIwgYgx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSIwIAYDVQQKExlsb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMSgw\nJgYDVQQDEx90bHNjYS5sb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMB4XDTI0MDEw\nMzE2MDMwMFoXDTMzMTIzMTE2MDMwMFowgYgxCzAJBgNVBAYTAlVTMRMwEQYDVQQI\nEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSIwIAYDVQQKExls\nb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMSgwJgYDVQQDEx90bHNjYS5sb2dpc3Rp\nY3NvcmcyLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEiupc\nh+c3geRPcUo7Mcv/M4RJ9nLLcTjawOaC3gRYLxnCr3Uq1W1Bt5XVy54n2Qlm+jh/\nU9AZPepNpqGuW3UL06NtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsG\nAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCCmDZBp\nvG0okkIRx0AauuVUO8QwCOex3RIVjHYsUYNW+jAKBggqhkjOPQQDAgNIADBFAiEA\nkSGaPDXb7VJbUz8EQ3/2mztGXXbUCDNFVbTL8GcAwiwCIDGUDM+Dov0OB2/spEWt\nOp50tPj/NTAShVTBgioopzBV\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.logisticsorg2.example.com",
+                "hostnameOverride": "peer1.logisticsorg2.example.com"
+            }
+        }
+
+	
+    },
+    "certificateAuthorities": {
+        "ca.logisticsorg2.example.com": {
+            "url": "https://localhost:16054",
+            "caName": "ca.logisticsorg2.example.com",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICfjCCAiSgAwIBAgIRANQd9eGD/F1FK4DQo0zKm1swCgYIKoZIzj0EAwIwgYgx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSIwIAYDVQQKExlsb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMSgw\nJgYDVQQDEx90bHNjYS5sb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMB4XDTI0MDEw\nMzE2MDMwMFoXDTMzMTIzMTE2MDMwMFowgYgxCzAJBgNVBAYTAlVTMRMwEQYDVQQI\nEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSIwIAYDVQQKExls\nb2dpc3RpY3NvcmcyLmV4YW1wbGUuY29tMSgwJgYDVQQDEx90bHNjYS5sb2dpc3Rp\nY3NvcmcyLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEiupc\nh+c3geRPcUo7Mcv/M4RJ9nLLcTjawOaC3gRYLxnCr3Uq1W1Bt5XVy54n2Qlm+jh/\nU9AZPepNpqGuW3UL06NtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsG\nAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCCmDZBp\nvG0okkIRx0AauuVUO8QwCOex3RIVjHYsUYNW+jAKBggqhkjOPQQDAgNIADBFAiEA\nkSGaPDXb7VJbUz8EQ3/2mztGXXbUCDNFVbTL8GcAwiwCIDGUDM+Dov0OB2/spEWt\nOp50tPj/NTAShVTBgioopzBV\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

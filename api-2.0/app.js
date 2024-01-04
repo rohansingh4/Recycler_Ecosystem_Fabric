@@ -79,6 +79,7 @@ function getErrorMessage(field) {
 
 // Register and enroll user
 app.post('/users', async function (req, res) {
+    console.log(req.body)
     var username = req.body.username;
     var orgName = req.body.orgName;
     logger.debug('End point : /users');
@@ -193,8 +194,8 @@ app.post('/channels/:channelName/chaincodes/:chaincodeName', async function (req
         var channelName = req.params.channelName;
         var fcn = req.body.fcn;
         var args = req.body.args;
-        var transient = req.body.transient;
-        console.log(`Transient data is ;${transient}`)
+        // var transient = req.body.transient;
+        // console.log(`Transient data is ;${transient}`)
         logger.debug('channelName  : ' + channelName);
         logger.debug('chaincodeName : ' + chaincodeName);
         logger.debug('fcn  : ' + fcn);
@@ -215,8 +216,7 @@ app.post('/channels/:channelName/chaincodes/:chaincodeName', async function (req
             res.json(getErrorMessage('\'args\''));
             return;
         }
-
-        let message = await invoke.invokeTransaction(channelName, chaincodeName, fcn, args, req.username, req.orgname, transient);
+        let message = await invoke.invokeTransaction(channelName, chaincodeName, fcn, args, req.username, req.orgname);
         console.log(`message result is : ${message}`)
 
         const response_payload = {

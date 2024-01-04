@@ -1,3 +1,4 @@
+
 ################################################################################
 #
 #   Section: Organizations
@@ -34,75 +35,258 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
-
-    - &Org1
-        # DefaultOrg defines the organization which is used in the sampleconfig
-        # of the fabric.git development environment
-        Name: Org1MSP
-
-        # ID to load the MSP definition as
-        ID: Org1MSP
-
-        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
-
-        # Policies defines the set of policies at this level of the config tree
-        # For organization policies, their canonical path is usually
-        #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
+    
+    - &ServiceOrg1
+        Name: ServiceOrg1MSP
+        ID: ServiceOrg1MSP
+        MSPDir: crypto-config/peerOrganizations/serviceorg1.example.com/msp
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+                Rule: "OR('ServiceOrg1MSP.admin', 'ServiceOrg1MSP.peer', 'ServiceOrg1MSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+                Rule: "OR('ServiceOrg1MSP.admin', 'ServiceOrg1MSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin')"
+                Rule: "OR('ServiceOrg1MSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('Org1MSP.peer')"
-
-        # leave this flag set to true.
+                Rule: "OR('ServiceOrg1MSP.peer')"
         AnchorPeers:
-            # AnchorPeers defines the location of peers which can be used
-            # for cross org gossip communication.  Note, this value is only
-            # encoded in the genesis block in the Application section context
-            - Host: peer0.org1.example.com
+            - Host: peer0.serviceorg1.example.com
               Port: 7051
 
-    - &Org2
-        # DefaultOrg defines the organization which is used in the sampleconfig
-        # of the fabric.git development environment
-        Name: Org2MSP
-
-        # ID to load the MSP definition as
-        ID: Org2MSP
-
-        MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
-
-        # Policies defines the set of policies at this level of the config tree
-        # For organization policies, their canonical path is usually
-        #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
+    - &OEMOrg1
+        Name: OEMOrg1MSP
+        ID: OEMOrg1MSP
+        MSPDir: crypto-config/peerOrganizations/oemorg1.example.com/msp
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+                Rule: "OR('OEMOrg1MSP.admin', 'OEMOrg1MSP.peer', 'OEMOrg1MSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+                Rule: "OR('OEMOrg1MSP.admin', 'OEMOrg1MSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin')"
+                Rule: "OR('OEMOrg1MSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('Org2MSP.peer')"
-
+                Rule: "OR('OEMOrg1MSP.peer')"    
         AnchorPeers:
-            # AnchorPeers defines the location of peers which can be used
-            # for cross org gossip communication.  Note, this value is only
-            # encoded in the genesis block in the Application section context
-            - Host: peer0.org2.example.com
+            - Host: peer0.oemorg1.example.com
               Port: 9051
+
+    - &LogisticsOrg1
+        Name: LogisticsOrg1MSP
+        ID: LogisticsOrg1MSP
+        MSPDir: crypto-config/peerOrganizations/logisticsorg1.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('LogisticsOrg1MSP.admin', 'LogisticsOrg1MSP.peer', 'LogisticsOrg1MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('LogisticsOrg1MSP.admin', 'LogisticsOrg1MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('LogisticsOrg1MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('LogisticsOrg1MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.logisticsorg1.example.com
+              Port: 11051
+
+    - &RestarOrg1
+        Name: RestarOrg1MSP
+        ID: RestarOrg1MSP
+        MSPDir: crypto-config/peerOrganizations/restarorg1.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('RestarOrg1MSP.admin', 'RestarOrg1MSP.peer', 'RestarOrg1MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('RestarOrg1MSP.admin', 'RestarOrg1MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('RestarOrg1MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('RestarOrg1MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.restarorg1.example.com
+              Port: 13051
+
+    - &RestarOrg2
+        Name: RestarOrg2MSP
+        ID: RestarOrg2MSP
+        MSPDir: crypto-config/peerOrganizations/restarorg2.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('RestarOrg2MSP.admin', 'RestarOrg2MSP.peer', 'RestarOrg2MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('RestarOrg2MSP.admin', 'RestarOrg2MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('RestarOrg2MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('RestarOrg2MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.restarorg2.example.com
+              Port: 15051
+
+    - &RestarOrg3
+        Name: RestarOrg3MSP
+        ID: RestarOrg3MSP
+        MSPDir: crypto-config/peerOrganizations/restarorg3.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('RestarOrg3MSP.admin', 'RestarOrg3MSP.peer', 'RestarOrg3MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('RestarOrg3MSP.admin', 'RestarOrg3MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('RestarOrg3MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('RestarOrg3MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.restarorg3.example.com
+              Port: 17051
+
+    - &ServiceOrg3
+        Name: ServiceOrg3MSP
+        ID: ServiceOrg3MSP
+        MSPDir: crypto-config/peerOrganizations/serviceorg3.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('ServiceOrg3MSP.admin', 'ServiceOrg3MSP.peer', 'ServiceOrg3MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ServiceOrg3MSP.admin', 'ServiceOrg3MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ServiceOrg3MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('ServiceOrg3MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.serviceorg3.example.com
+              Port: 19051
+
+    - &ServiceOrg2
+        Name: ServiceOrg2MSP
+        ID: ServiceOrg2MSP
+        MSPDir: crypto-config/peerOrganizations/serviceorg2.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('ServiceOrg2MSP.admin', 'ServiceOrg2MSP.peer', 'ServiceOrg2MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ServiceOrg2MSP.admin', 'ServiceOrg2MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ServiceOrg2MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('ServiceOrg2MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.serviceorg2.example.com
+              Port: 21051
+
+    - &OEMOrg2
+        Name: OEMOrg2MSP
+        ID: OEMOrg2MSP
+        MSPDir: crypto-config/peerOrganizations/oemorg2.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('OEMOrg2MSP.admin', 'OEMOrg2MSP.peer', 'OEMOrg2MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('OEMOrg2MSP.admin', 'OEMOrg2MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('OEMOrg2MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('OEMOrg2MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.oemorg2.example.com
+              Port: 23051
+
+    - &LogisticsOrg2
+        Name: LogisticsOrg2MSP
+        ID: LogisticsOrg2MSP
+        MSPDir: crypto-config/peerOrganizations/logisticsorg2.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('LogisticsOrg2MSP.admin', 'LogisticsOrg2MSP.peer', 'LogisticsOrg2MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('LogisticsOrg2MSP.admin')"
+            Admins:
+                Type: Signature
+                Rule: "OR('LogisticsOrg2MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('LogisticsOrg2MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.logisticsorg2.example.com
+              Port: 25051
+
+    - &LogisticsOrg3
+        Name: LogisticsOrg3MSP
+        ID: LogisticsOrg3MSP
+        MSPDir: crypto-config/peerOrganizations/logisticsorg3.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('LogisticsOrg3MSP.admin', 'LogisticsOrg3MSP.peer', 'LogisticsOrg3MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('LogisticsOrg3MSP.admin', 'LogisticsOrg3MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('LogisticsOrg3MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('LogisticsOrg3MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.logisticsorg3.example.com
+              Port: 27051
+
+    - &ServiceOrg4
+        Name: ServiceOrg4MSP
+        ID: ServiceOrg4MSP
+        MSPDir: crypto-config/peerOrganizations/serviceorg4.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('ServiceOrg4MSP.admin', 'ServiceOrg4MSP.peer', 'ServiceOrg4MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ServiceOrg4MSP.admin', 'ServiceOrg4MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ServiceOrg4MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('ServiceOrg4MSP.peer')"
+        AnchorPeers:
+            - Host: peer0.serviceorg4.example.com
+              Port: 29051
 
 ################################################################################
 #
@@ -308,8 +492,18 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
-                - *Org2
+                - *OEMOrg1
+                - *OEMOrg2
+                - *LogisticsOrg1
+                - *LogisticsOrg2
+                - *LogisticsOrg3
+                - *RestarOrg1
+                - *RestarOrg2
+                - *RestarOrg3
+                - *ServiceOrg1
+                - *ServiceOrg2
+                - *ServiceOrg3
+                - *ServiceOrg4
             Capabilities:
                 <<: *ApplicationCapabilities
 
@@ -356,5 +550,156 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                - *Org1
-                - *Org2
+                - *OEMOrg1
+                - *OEMOrg2
+                - *LogisticsOrg1
+                - *LogisticsOrg2
+                - *LogisticsOrg3
+                - *RestarOrg1
+                - *RestarOrg2
+                - *RestarOrg3
+                - *ServiceOrg1
+                - *ServiceOrg2
+                - *ServiceOrg3
+                - *ServiceOrg4
+
+    eolchannel1:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg1
+                - *OEMOrg1
+                - *LogisticsOrg1
+                - *RestarOrg1
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel2:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg1
+                - *OEMOrg1
+                - *LogisticsOrg1
+                - *RestarOrg2
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel3:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg1
+                - *OEMOrg1
+                - *LogisticsOrg1
+                - *RestarOrg3
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel4:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg3
+                - *OEMOrg1
+                - *LogisticsOrg1
+                - *RestarOrg1
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel5:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg3
+                - *OEMOrg1
+                - *LogisticsOrg1
+                - *RestarOrg2
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel6:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg3
+                - *OEMOrg1
+                - *LogisticsOrg1
+                - *RestarOrg3
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel7:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg2
+                - *OEMOrg2
+                - *LogisticsOrg2
+                - *RestarOrg1
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel8:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg2
+                - *OEMOrg2
+                - *LogisticsOrg2
+                - *RestarOrg2
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel9:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg2
+                - *OEMOrg2
+                - *LogisticsOrg2
+                - *RestarOrg3
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel10:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg3
+                - *LogisticsOrg3
+                - *RestarOrg1
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    eolchannel11:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *ServiceOrg4
+                - *LogisticsOrg3
+                - *RestarOrg1
+            Capabilities:
+                <<: *ApplicationCapabilities

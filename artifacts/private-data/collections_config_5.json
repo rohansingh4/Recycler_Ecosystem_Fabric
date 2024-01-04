@@ -1,0 +1,11 @@
+[
+    {
+         "name": "eolchannel5",
+         "policy": "OR('ServiceOrg3MSP.member', 'RestarOrg2MSP.member')",
+         "requiredPeerCount": 0,
+         "maxPeerCount": 3,
+         "blockToLive": 1000000,
+         "memberOnlyRead": true,
+         "memberOnlyWrite": true         
+    }
+]
